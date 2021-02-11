@@ -51,7 +51,7 @@ export async function getStaticPaths() {
       }
     );
     console.log(results);
-    const { data } = await results.json();
+    const { data } = [];
     const paths = data.map((post) => ({ params: { id: String(post._id) } }));
     /*
       [
