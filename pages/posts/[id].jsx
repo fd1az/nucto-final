@@ -34,7 +34,7 @@ const Porduct = ({ post }) => {
 export async function getStaticPaths() {
   // get all the paths for your posts from an API
   // or file system
-  console.log(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`);
+  console.log(`${process.env.DATABASE_URL}`);
   const results = await fetch(
     `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`
   );
@@ -51,9 +51,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  console.log(`http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`);
+  console.log(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`);
+
   const res = await fetch(
-    `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts/${params.id}`
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts/${params.id}`
   );
   const { data } = await res.json();
   console.log(data[0]);
