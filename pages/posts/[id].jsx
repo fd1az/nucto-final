@@ -36,7 +36,16 @@ export async function getStaticPaths() {
   // or file system
   console.log(`${process.env.DATABASE_URL}`);
   const results = await fetch(
-    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`,
+    {
+      method: 'GET',
+      headers: {
+        // update with your user-agent
+        'User-Agent':
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
+        Accept: 'application/json; charset=UTF-8',
+      },
+    }
   );
 
   const { data } = await results.json();
@@ -54,7 +63,16 @@ export async function getStaticProps({ params }) {
   console.log(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`);
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts/${params.id}`
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts/${params.id}`,
+    {
+      method: 'GET',
+      headers: {
+        // update with your user-agent
+        'User-Agent':
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
+        Accept: 'application/json; charset=UTF-8',
+      },
+    }
   );
   const { data } = await res.json();
   console.log(data[0]);
