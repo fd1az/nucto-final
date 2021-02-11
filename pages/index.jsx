@@ -17,7 +17,7 @@ export default function Home({ posts }) {
   );
 
   return (
-    <Box bg="gray.100" h="100%" py={16}>
+    <Box bg="gray.100" h="100vh" py={16} pb="200px">
       <Flex
         as="main"
         justifyContent="flex-start"

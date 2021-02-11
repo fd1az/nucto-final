@@ -11,6 +11,7 @@ import {
   ModalCloseButton,
   ModalFooter,
   Input,
+  useToast,
 } from '@chakra-ui/react';
 
 import { useMutation, useQueryClient } from 'react-query';
@@ -18,17 +19,18 @@ import { useMutation, useQueryClient } from 'react-query';
 const CreatePostModal = ({ isOpen, onClose }) => {
   const [title, setTitle] = useState('');
   const [description, setDesc] = useState('');
+  const toast = useToast();
 
   const queryClient = useQueryClient();
   const initialRef = React.useRef();
   const finalRef = React.useRef();
 
   const createPost = useMutation(
-    async (title, desc) => {
+    async (post) => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       return fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`, {
         method: 'POST',
-        body: JSON.stringify({ title, desc }),
+        body: JSON.stringify(post),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -38,12 +40,20 @@ const CreatePostModal = ({ isOpen, onClose }) => {
       onSuccess: () => {
         queryClient.invalidateQueries('posts');
         onClose();
+        toast({
+          title: 'Account created.',
+          description: "We've created your account for you.",
+          status: 'success',
+          duration: 1000,
+          isClosable: true,
+          position: 'top',
+        });
       },
     }
   );
 
   const handlerCreatePost = (title, desc) => {
-    createPost.mutate(title, desc);
+    createPost.mutate({ title, desc });
   };
 
   return (

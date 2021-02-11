@@ -5,7 +5,7 @@ export const createPost = async (db, post) => {
     .insertOne({
       _id: uuidv4(),
       ...post,
-      createdAt: new Date().toDateString(),
+      createdAt: new Date().toLocaleString(),
     })
     .then(({ ops }) => ops[0]);
 };
@@ -20,5 +20,5 @@ export const getPost = async (db, id) => {
 };
 
 export const getPosts = async (db) => {
-  return db.collection('posts').find().toArray();
+  return db.collection('posts').find().sort({ createdAt: -1 }).toArray();
 };

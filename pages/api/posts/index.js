@@ -12,9 +12,10 @@ handler
     res.send({ data: posts });
   })
   .post(async (req, res) => {
+    console.log(req.body);
     const post = await createPost(req.db, {
       title: req.body.title,
-      description: req.body.description,
+      description: req.body.desc,
     });
 
     res.send({ data: post });
