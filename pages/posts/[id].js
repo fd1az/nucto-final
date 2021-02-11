@@ -52,9 +52,10 @@ export async function getStaticPaths() {
     );
     console.log(results);
     const { data } = [];
-    const paths = data?.map((post) => ({
-      params: { id: String(post._id) },
-    })) || [{ params: {} }];
+    const paths =
+      data?.map((post) => ({
+        params: { id: String(post._id) },
+      })) || [];
     /*
       [
         {params: {slug: 'get-started-with-node'}},
