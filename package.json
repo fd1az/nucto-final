@@ -1,0 +1,27 @@
+{
+  "name": "master-next-final",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^1.2.1",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "framer-motion": "^3.3.0",
+    "mongodb": "^3.6.4",
+    "next": "10.0.6",
+    "next-connect": "^0.9.1",
+    "nprogress": "^0.2.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-query": "^3.8.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.1"
+  }
+}

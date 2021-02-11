@@ -1,0 +1,63 @@
+import { Box, Button, Text } from '@chakra-ui/react';
+const Porduct = ({ post }) => {
+  return (
+    <Box
+      w="100%"
+      bg="gray.100"
+      height="100vh"
+      display="flex"
+      justifyContent="center"
+    >
+      <Box
+        maxH="400px"
+        py={16}
+        w="500px"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+        bg="white"
+        m={5}
+      >
+        <Box p="6" display="flex" flexDirection="column">
+          <Text as="h1" fontSize="25px" fontWeight="600" textAlign="center">
+            {post.title}
+          </Text>
+          <Text textAlign="center" py="10">
+            {post.description}
+          </Text>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+export async function getStaticPaths() {
+  // get all the paths for your posts from an API
+  // or file system
+  console.log(`${process.env.NEXT_PUBLIC_URL}/api/posts`);
+  const results = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/posts`);
+
+  const { data } = await results.json();
+  const paths = data.map((post) => ({ params: { id: String(post._id) } }));
+  /*
+    [
+      {params: {slug: 'get-started-with-node'}},
+      {params: {slug: 'top-frameworks'}}
+    ]
+    */
+  return { paths, fallback: true };
+}
+
+export async function getStaticProps({ params }) {
+  console.log(`${process.env.NEXT_PUBLIC_URL}/api/posts`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/posts/${params.id}`
+  );
+  const { data } = await res.json();
+  console.log(data[0]);
+  return {
+    props: { post: data[0] },
+  };
+}
+
+export default Porduct;
