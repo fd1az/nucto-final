@@ -4,13 +4,15 @@ import { Post } from '../components/Post';
 import { useQuery } from 'react-query';
 
 export default function Home({ posts }) {
-  console.log(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`);
+  console.log(
+    `${process.env.PROTOCOL}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`
+  );
   const { data } = useQuery(
     'posts',
     () =>
-      fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`).then((data) =>
-        data.json()
-      ),
+      fetch(
+        `${process.env.PROTOCOL}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`
+      ).then((data) => data.json()),
     {
       initialData: { data: posts },
     }

@@ -34,11 +34,13 @@ const Porduct = ({ post }) => {
 export async function getStaticPaths() {
   // get all the paths for your posts from an API
   // or file system
-  console.log(`Url: ${process.env.NEXT_PUBLIC_VERCEL_URL}`);
+  console.log(
+    `Url: ${process.env.PROTOCOL}${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  );
   console.log(`Connection: ${global.mongo}`);
   try {
     const results = await fetch(
-      `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`,
+      `${process.env.PROTOCOL}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`,
       {
         method: 'GET',
         headers: {
@@ -69,11 +71,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  console.log(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`);
+  console.log(
+    `${process.env.PROTOCOL}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`
+  );
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts/${params.id}`,
+      `${process.env.PROTOCOL}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts/${params.id}`,
       {
         method: 'GET',
         headers: {

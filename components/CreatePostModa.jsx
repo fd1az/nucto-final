@@ -28,13 +28,16 @@ const CreatePostModal = ({ isOpen, onClose }) => {
   const createPost = useMutation(
     async (post) => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      return fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`, {
-        method: 'POST',
-        body: JSON.stringify(post),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      return fetch(
+        `${process.env.PROTOCOL}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`,
+        {
+          method: 'POST',
+          body: JSON.stringify(post),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
     },
     {
       onSuccess: () => {
