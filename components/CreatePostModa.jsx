@@ -26,7 +26,7 @@ const CreatePostModal = ({ isOpen, onClose }) => {
   const createPost = useMutation(
     async (title, desc) => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      return fetch('http://localhost:3000/api/posts', {
+      return fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts`, {
         method: 'POST',
         body: JSON.stringify({ title, desc }),
         headers: {
