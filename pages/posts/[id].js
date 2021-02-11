@@ -20,10 +20,10 @@ const Porduct = ({ post }) => {
       >
         <Box p="6" display="flex" flexDirection="column">
           <Text as="h1" fontSize="25px" fontWeight="600" textAlign="center">
-            {post.title}
+            {post?.title}
           </Text>
           <Text textAlign="center" py="10">
-            {post.description}
+            {post?.description}
           </Text>
         </Box>
       </Box>
@@ -52,8 +52,9 @@ export async function getStaticPaths() {
     );
     console.log(results);
     const { data } = [];
-    const paths =
-      data?.map((post) => ({ params: { id: String(post._id) } })) || [];
+    const paths = data?.map((post) => ({
+      params: { id: String(post._id) },
+    })) || [{ params: {} }];
     /*
       [
         {params: {slug: 'get-started-with-node'}},
